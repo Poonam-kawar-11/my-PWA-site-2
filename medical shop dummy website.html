@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthyLife Medical Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="greeting" class="greeting-box"></div>
+<script>
+  // Greeting message based on time
+  function showGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+    let message = "";
+
+    if (hour < 12) {
+      message = "🌞 Good Morning! Welcome to HealthyLife!";
+    } else if (hour < 18) {
+      message = "☀️ Good Afternoon! Hope you're staying healthy!";
+    } else {
+      message = "🌙 Good Evening! We're here to care for you!";
+    }
+
+    document.getElementById("greeting").textContent = message;
+  }
+
+  // Call the function when the page loads
+  window.onload = showGreeting;
+</script>
+
+  <header>
+    <h1>HealthyLife Medical Store</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>Welcome to HealthyLife</h2>
+    <p>Your trusted local medical store. We care for your health!</p>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We are a family-run medical shop with over 10 years of experience. We provide genuine medicines, healthcare products, and friendly service.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Prescription Medicines</li>
+      <li>Free Home Delivery</li>
+      <li>Health & Wellness Products</li>
+      <li>Upload Prescription Option (Coming Soon)</li>
+    </ul>
+  </section>
+  <section id="search">
+  <h2>Search Medicines</h2>
+  <input type="text" id="searchBox" placeholder="Search for medicine..." onkeyup="searchMedicine()" />
+  <ul id="medicineList">
+    <!-- Results will appear here -->
+  </ul>
+
+
+
+  <section id="products">
+    <section id="products">
+  <h2>Our Medicines</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/150" alt="Paracetamol">
+      <h3>Paracetamol 500mg</h3>
+      <p>₹25</p>
+      <button onclick="addToCart('Paracetamol 500mg')">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/150" alt="Vitamin C">
+      <h3>Vitamin C Tablets</h3>
+      <p>₹60</p>
+      <button onclick="addToCart('Vitamin C Tablets')">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/150" alt="Hand Sanitizer">
+      <h3>Hand Sanitizer</h3>
+      <p>₹45</p>
+      <button onclick="addToCart('Hand Sanitizer')">Add to Cart</button>
+    </div>
+
+  </div>
+</section>
+
+  <section id="cart">
+  <h2>Your Cart 🛒</h2>
+  <ul id="cartItems">
+    <li>No items yet.</li>
+  </ul>
+</section>
+<script>
+  const cart = [];
+
+  function addToCart(itemName) {
+    cart.push(itemName);
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartList = document.getElementById("cartItems");
+    cartList.innerHTML = "";
+
+    if (cart.length === 0) {
+      cartList.innerHTML = "<li>No items yet.</li>";
+    } else {
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.textContent = item + " ";
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = () => {
+          cart.splice(index, 1);
+          updateCart();
+        };
+        li.appendChild(removeBtn);
+        cartList.appendChild(li);
+      });
+    }
+  }
+</script>
+
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Address:</strong> Main Road, Pune, Maharashtra</p>
+    <p><strong>Phone:</strong> +91-9876543210</p>
+    <p><strong>Email:</strong> healthylife@gmail.com</p>
+  </section>
+
+  <footer>
+    <p>© 2025 HealthyLife Medical Store. All rights reserved.</p>
+  </footer>
+  <script>
+  const medicines = [
+    "Paracetamol 500mg",
+    "Vitamin C Tablets",
+    "Cough Syrup",
+    "Pain Relief Balm",
+    "Antacid Tablets",
+    "Hand Sanitizer",
+    "Digital Thermometer",
+    "Multivitamins",
+    "Glucose Powder"
+  ];
+  <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+
+
+  function searchMedicine() {
+    const input = document.getElementById("searchBox").value.toLowerCase();
+    const list = document.getElementById("medicineList");
+
+    // Clear previous results
+    list.innerHTML = "";
+
+    // Filter and show matching medicines
+    const filtered = medicines.filter((item) => item.toLowerCase().includes(input));
+
+    if (filtered.length === 0) {
+      list.innerHTML = "<li>No medicine found.</li>";
+    } else {
+      filtered.forEach((medicine) => {
+        const li = document.createElement("li");
+        li.textContent = medicine;
+        list.appendChild(li);
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
